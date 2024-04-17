@@ -15,15 +15,6 @@ func Abs[N Numeric](x N) (zero N) {
 	return x
 }
 
-func Any[T any](arr []T, f func(T) bool) (ind int, ok bool) {
-	for i, v := range arr {
-		if f(v) {
-			return i, true
-		}
-	}
-	return -1, false
-}
-
 func Clamp[N Numeric](val, lower, upper N) (res N) {
 	switch {
 	case val >= upper:
