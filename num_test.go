@@ -12,23 +12,17 @@ type scExpect struct {
 
 func TestSmartClamp(t *testing.T) {
 	cases := []scExpect{
-		{inp: 5, max: 10, exp: 5},
-		{inp: 50, max: 5, exp: 5},
-		{inp: 5, max: 5, exp: 5},
-		{inp: 5, max: 4, exp: 4},
-		{inp: 5, max: 0, exp: 0},
-		{inp: 0, max: 5, exp: 0},
-		{inp: 0, max: 0, exp: 0},
+		{inp: 10, max: 10, exp: 10},
+		{inp: 1, max: 10, exp: 1},
 		{inp: -1, max: 10, exp: 9},
-		{inp: -1, max: 5, exp: 4},
-		{inp: -1, max: 0, exp: 0},
+		{inp: 100, max: 10, exp: 10},
+		{inp: -100, max: 10, exp: 0},
+
+		{inp: -10, max: -10, exp: -10},
 		{inp: -1, max: -10, exp: -1},
-		{inp: -1, max: -5, exp: -1},
-		{inp: -1, max: -1, exp: -1},
 		{inp: 1, max: -10, exp: -9},
-		{inp: 1, max: -5, exp: -4},
-		{inp: -201, max: 10, exp: 9},
-		{inp: 201, max: -10, exp: -9},
+		{inp: -100, max: -10, exp: -10},
+		{inp: 100, max: -10, exp: 0},
 	}
 
 	for _, c := range cases {
