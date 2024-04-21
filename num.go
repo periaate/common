@@ -1,11 +1,11 @@
 package common
 
-import (
-	"golang.org/x/exp/constraints"
-)
-
 type Numeric interface {
-	~float32 | ~float64 | ~int | ~int8 | ~int16 | ~int32 | ~int64 | ~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 | ~uintptr
+	~float32 | ~float64 | Integer
+}
+
+type Integer interface {
+	~int | ~int8 | ~int16 | ~int32 | ~int64 | ~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 | ~uintptr
 }
 
 func Abs[N Numeric](x N) (zero N) {
@@ -26,7 +26,7 @@ func Clamp[N Numeric](val, lower, upper N) (res N) {
 	}
 }
 
-func RangeClamp[N constraints.Integer](val, a, b N) N {
+func RangeClamp[N Integer](val, a, b N) N {
 	if a == b {
 		return b
 	}
@@ -51,7 +51,7 @@ func SameSign[N Numeric](a, b N) bool {
 	return (a > 0 && b > 0) || (a < 0 && b < 0)
 }
 
-func SmartClamp[I constraints.Integer](a, b I) I {
+func SmartClamp[I Integer](a, b I) I {
 	switch {
 	case b == 0 || a == 0:
 		return 0
