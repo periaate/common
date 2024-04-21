@@ -123,3 +123,10 @@ func Combinations[T any](a []T, B []T) (res [][2]T) {
 
 	return res
 }
+
+func Join[T any](a ...[]T) (res []T) {
+	for _, arr := range a {
+		res = append(res, arr...)
+	}
+	return res
+}
