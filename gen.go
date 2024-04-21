@@ -30,6 +30,17 @@ func All[T any, K comparable](mustBe K, fns ...func(T) K) func(T) K {
 	}
 }
 
+func Any[T any](ifAny bool, fns ...func(T) bool) func(T) bool {
+	return func(a T) bool {
+		for _, fn := range fns {
+			if fn(a) == ifAny {
+				return ifAny
+			}
+		}
+		return !ifAny
+	}
+}
+
 func Negate[T any](fn func(T) bool) func(T) bool {
 	return func(t T) bool {
 		return !fn(t)
